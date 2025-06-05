@@ -1,0 +1,12 @@
+Fetching NHTSA scenarios*******************
+Fetching NHTSA scenarios...
+Attempt 1 failed: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+Attempt 2 failed: HTTPSConnectionPool(host='www.nhtsa.gov', port=443): Read timed out. (read timeout=30)
+Attempt 3 failed: HTTPSConnectionPool(host='www.nhtsa.gov', port=443): Read timed out. (read timeout=30)
+Failed to fetch NHTSA scenarios: HTTPSConnectionPool(host='www.nhtsa.gov', port=443): Read timed out. (read timeout=30)
+
+
+', RemoteDisconnected('Remote end closed connection without response'))
+Attempt 2 failed: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+Attempt 3 failed: HTTPSConnectionPool(host='www.nhtsa.gov', port=443): Read timed out. (read timeout=30)
+Failed to fetch NHTSA scenarios: HTTPSConnectionPool(host='www.nhtsa.gov', port=443): Read timed out. (read timeout=30) 
