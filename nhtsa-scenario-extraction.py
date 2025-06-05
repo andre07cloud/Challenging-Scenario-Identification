@@ -1,33 +1,40 @@
-
 from fars_cleaner import load_pipeline, FARSFetcher
 #import fars_cleaner.datasets as ds
 #from pooch import HTTPDownloader, create
 #import requests
 from pathlib import Path
 
+import requests
+from requests.exceptions import ConnectionError, Timeout
+import time
 
 def fetch_nhtsa_scenarios():
-
-
-    PATH_FILE = Path("/home/andredejesus/Phd-Projects/Poly/Challenging-Scenario-Identification")
+    PATH_FILE = Path("scenarios")
     cache_path = "fars-crashes"
+    print("Fetching NHTSA scenarios*******************")
     fetcher = FARSFetcher(project_dir=PATH_FILE, cache_path=cache_path, show_progress=True)
-    #vehicles, acidents, people = load_pipeline(fetcher = fetcher, first_run=True, target_folder=PATH_FILE)
     print("Fetching NHTSA scenarios...")
-    df = fetcher.fetch_single(2018)
-    print("NHTSA scenarios fetched successfully.")
 
+    retries = 3
+    for attempt in range(retries):
+        try:
+            df = fetcher.fetch_single(2018)
+            print("NHTSA scenarios fetched successfully.")
+            return df
+        except (ConnectionError, Timeout) as e:
+            print(f"Attempt {attempt + 1} failed: {e}")
+            if attempt < retries - 1:
+                time.sleep(2)  # Wait before retrying
+            else:
+                raise
 
-    return df
-
+# Example usage
 if __name__ == "__main__":
-    crashes = fetch_nhtsa_scenarios()
-    #print(df.shape)
-    #print(df.head())
-    #df.to_csv('nhtsa_scenarios.csv', index=False)
-    print(crashes)
-
-
+    try:
+        nhtsa_scenarios = fetch_nhtsa_scenarios()
+        print(nhtsa_scenarios.head())
+    except Exception as e:
+        print(f"Failed to fetch NHTSA scenarios: {e}")
 """
 # 1. Créer une session requests avec un timeout plus long (par ex. 120 s)
 session = requests.Session()
