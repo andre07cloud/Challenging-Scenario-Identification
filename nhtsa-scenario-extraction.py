@@ -1,11 +1,11 @@
 
 from fars_cleaner import load_pipeline, FARSFetcher
-import fars_cleaner.datasets as ds
-from pooch import HTTPDownloader, create
-import requests
+#import fars_cleaner.datasets as ds
+#from pooch import HTTPDownloader, create
+#import requests
 from pathlib import Path
 
-"""
+
 def fetch_nhtsa_scenarios():
 
 
@@ -26,9 +26,9 @@ if __name__ == "__main__":
     #print(df.head())
     #df.to_csv('nhtsa_scenarios.csv', index=False)
     print(crashes)
+
+
 """
-
-
 # 1. Créer une session requests avec un timeout plus long (par ex. 120 s)
 session = requests.Session()
 session.timeout = 120
@@ -50,3 +50,4 @@ try:
 except Exception as e:
     print("Ça a encore planté :", type(e).__name__, e)
 
+"""
